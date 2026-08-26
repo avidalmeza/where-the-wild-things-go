@@ -1,0 +1,2 @@
+### Data
+Neigh, C. (2025). <i>HLS Sentinel-2 Multi-spectral Instrument Vegetation Indices Daily Global 30m v2.0</i> [Dataset]. NASA Land Processes Distributed Active Archive Center. https://doi.org/10.5067/HLS/HLSS30_VI.002 Date Accessed: 2026-08-25

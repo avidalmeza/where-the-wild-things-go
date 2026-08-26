@@ -1,0 +1,56 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# RStudio files
+.Rproj.user/
+*.Rproj
+
+# OAuth2 token and sensitive files
+.httr-oauth
+.secrets
+.netrc
+
+# R Environment files
+.Renviron
+
+# RStudio Connect folder
+rsconnect/
+
+# Posit files
+.positai
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Visual Studio Code files
+.vscode
+*.vsix
+
+# Jupyter Notebook files
+.ipynb_checkpoints
+
+# Environment files
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Quarto files
+/.quarto/
+
+# Project files
+data/
