@@ -31,4 +31,4 @@ for g in granules:
         if any(f".{i}.tif" in link for i in target_indices):
             filtered_links.append(link)
 
-earthaccess.download(filtered_links, "data/HLS330")
+earthaccess.download(filtered_links, "data/HLSS30")
