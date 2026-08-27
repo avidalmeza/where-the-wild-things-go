@@ -13,7 +13,7 @@ library(terra)
 library(sf)
 
 condition <- str_c(c("NDVI", "EVI", "SAVI", "MSAVI"), collapse = "|")
-tile_identifier <- "T[0-9]{2}[A-Z]{3}"
+tile_id_pattern <- "T[0-9]{2}[A-Z]{3}"
 
 tif_filepaths <- list.files(
   path = here("data", "HLSS30"),
@@ -24,10 +24,9 @@ tif_filepaths <- list.files(
 raster_stack <- tibble(
   filepath = tif_filepaths,
   vi = str_extract(basename(filepath), condition),
-  tile = str_extract(basename(filepath), tile_identifier)
+  tile_id = str_extract(basename(filepath), tile_id_pattern)
 ) |>
-  summarise(stack = list(rast(filepath)), .by = c(vi, tile)) |> # Read raster stack
-  mutate(outpath = here("outputs", paste0(vi, "_", tile, "_mean.tif")))
+  summarise(stack = list(rast(filepath)), .by = c(vi, tile_id)) # Read raster stack
 
 scale_factor <- 0.0001
 missing_value <- -9999
@@ -42,10 +41,14 @@ raster_stack <- raster_stack |>
   )
 
 mosaics_vi <- raster_stack |>
-  group_by(vi) |>
+  mutate(vi = as.factor(vi)) |>
   # Apply mosaic() to mean_raster iteratively
-  mutate(mosaic = list(reduce(mean_raster, mosaic))) |>
-  ungroup()
+  summarize(
+    mosaic = list(do.call(mosaic, mean_raster)),
+    .by = vi
+  ) |>
+  mutate(outpath = here("outputs", paste0(vi, "_stl_mean.tif")))
+
 
 stl <- st_read(here("data", "tl_2020_us_uac20", "tl_2020_us_uac20.shp")) |>
   filter(NAME20 == "St. Louis, MO--IL") |>
