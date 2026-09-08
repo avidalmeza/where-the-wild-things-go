@@ -1,5 +1,5 @@
 #####################################
-# 02-prepare-images.py
+# 02-prepare-images.R
 #
 # Stack, crop, and summarize HLSS30 images
 #
